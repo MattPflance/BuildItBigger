@@ -26,4 +26,6 @@ dependencies {
     compile 'com.android.support:design:23.2.0'
     // Added for AdMob
     compile 'com.google.android.gms:play-services:8.4.0'
+    // Libraries
+    compile project(':TheJokester')
 }
