@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.thejokester.Jokester;
-import com.mattpflance.jokedisplayactivity.JokeDisplayActivity;
+import com.mattpflance.textdisplayactivity.TextDisplayActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void tellJoke(View view){
         String oneLiner = mTheJokester.getOneLiner();
-        Intent intent = new Intent(this, JokeDisplayActivity.class);
+        Intent intent = new Intent(this, TextDisplayActivity.class);
         intent.putExtra("ONE LINER", oneLiner);
         startActivity(intent);
     }

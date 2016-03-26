@@ -28,5 +28,5 @@ dependencies {
     compile 'com.google.android.gms:play-services:8.4.0'
     // Libraries
     compile project(':TheJokester')
-    compile project(':jokedisplayactivity')
+    compile project(':TextDisplayActivity')
 }

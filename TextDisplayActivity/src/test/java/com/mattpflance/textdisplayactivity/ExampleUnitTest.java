@@ -1,4 +1,4 @@
-package com.mattpflance.jokedisplayactivity;
+package com.mattpflance.textdisplayactivity;
 
 import org.junit.Test;
 

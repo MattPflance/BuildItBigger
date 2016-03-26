@@ -25,3 +25,8 @@ dependencies {
     compile 'com.android.support:cardview-v7:23.2.0'
     compile 'com.android.support:design:23.2.0'
 }
+
+allprojects {
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
+}
