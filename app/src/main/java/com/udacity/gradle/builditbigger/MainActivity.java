@@ -1,7 +1,9 @@
 package com.udacity.gradle.builditbigger;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import java.util.ArrayList;
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         String oneLiner = mTheJokester.getOneLiner();
         Intent intent = new Intent(this, TextDisplayActivity.class);
         intent.putExtra(TextDisplayActivity.ONE_LINER, oneLiner);
+        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, oneLiner));
         startActivity(intent);
     }
 
