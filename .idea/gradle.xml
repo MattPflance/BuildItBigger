@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/TextDisplayActivity" />
             <option value="$PROJECT_DIR$/TheJokester" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/backend" />
           </set>
         </option>
       </GradleProjectSettings>
