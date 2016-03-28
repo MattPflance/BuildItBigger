@@ -6,56 +6,62 @@
     android:background="@color/colorPrimary"
     tools:context=".MainActivityFragment">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:padding="@dimen/activity_padding"
+    <ScrollView
         android:layout_centerInParent="true"
         android:layout_alignParentTop="true"
-        android:gravity="center"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <android.support.v7.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            xtra:cardCornerRadius="2dp"
-            xtra:elevation="8dp">
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="@dimen/view_padding"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/instructions_text_view"
+            <android.support.v7.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                xtra:cardCornerRadius="2dp"
+                xtra:elevation="8dp">
+
+                <TextView
+                    android:id="@+id/instructions_text_view"
+                    android:padding="@dimen/view_padding"
+                    android:gravity="center"
+                    android:text="@string/instructions"
+                    android:textSize="12pt"
+                    android:textStyle="bold"
+                    android:background="@color/colorLight"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content" />
+
+            </android.support.v7.widget.CardView>
+
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="60dp"
                 android:padding="@dimen/view_padding"
-                android:gravity="center"
-                android:text="@string/instructions"
-                android:textSize="12pt"
-                android:textStyle="bold"
-                android:background="@color/colorLight"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content" />
+                android:text="@string/one_liner_button_text"
+                android:onClick="tellOneLiner" />
 
-        </android.support.v7.widget.CardView>
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:padding="@dimen/view_padding"
+                android:text="@string/knock_knock_button_text"
+                android:onClick="tellKnockKnock" />
 
-        <Button
-            android:layout_width="150dp"
-            android:layout_height="60dp"
-            android:padding="@dimen/view_padding"
-            android:text="@string/one_liner_button_text"
-            android:onClick="tellOneLiner" />
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:padding="@dimen/view_padding"
+                android:text="@string/dad_joke_button_text"
+                android:onClick="tellDadJoke" />
 
-        <Button
-            android:layout_width="150dp"
-            android:layout_height="60dp"
-            android:padding="@dimen/view_padding"
-            android:text="@string/knock_knock_button_text"
-            android:onClick="tellKnockKnock" />
+        </LinearLayout>
 
-        <Button
-            android:layout_width="150dp"
-            android:layout_height="60dp"
-            android:padding="@dimen/view_padding"
-            android:text="@string/dad_joke_button_text"
-            android:onClick="tellDadJoke" />
-
-    </LinearLayout>
+    </ScrollView>
 
     <ProgressBar
         android:id="@+id/loadingBar"
