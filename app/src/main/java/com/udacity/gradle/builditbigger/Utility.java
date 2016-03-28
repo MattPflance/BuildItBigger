@@ -13,4 +13,8 @@ public class Utility {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
+    public static boolean isFreeVersion() {
+        return BuildConfig.APPLICATION_ID.equals("com.udacity.gradle.builditbigger.free");
+    }
+
 }
