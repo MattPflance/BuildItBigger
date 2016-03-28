@@ -17,3 +17,8 @@ allprojects {
         jcenter()
     }
 }
+
+task testAppEngine {
+    dependsOn (":backend:appengineRun", ":app:test")
+    finalizedBy ":backend:appengineStop"
+}
