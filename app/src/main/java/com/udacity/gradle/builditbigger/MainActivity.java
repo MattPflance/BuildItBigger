@@ -22,6 +22,14 @@ public class MainActivity extends AppCompatActivity implements EndpointsAsyncTas
         new EndpointsAsyncTask(this).execute(new Pair<Context, String>(this, TextDisplayActivity.ONE_LINER));
     }
 
+    public void tellKnockKnock(View view){
+        new EndpointsAsyncTask(this).execute(new Pair<Context, String>(this, TextDisplayActivity.KNOCK_KNOCK));
+    }
+
+    public void tellDadJoke(View view){
+        new EndpointsAsyncTask(this).execute(new Pair<Context, String>(this, TextDisplayActivity.DAD_JOKE));
+    }
+
     /**
      * Callback for fetching EndpointsAsyncTask
      */
@@ -31,13 +39,4 @@ public class MainActivity extends AppCompatActivity implements EndpointsAsyncTas
         intent.putStringArrayListExtra(jokeType, result);
         startActivity(intent);
     }
-/* These are not needed in the /main directory since they are PAID features only
-    public void tellKnockKnock(View view){
-        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, TextDisplayActivity.KNOCK_KNOCK));
-    }
-
-    public void tellDadJoke(View view){
-        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, TextDisplayActivity.DAD_JOKE));
-    }
-    */
 }

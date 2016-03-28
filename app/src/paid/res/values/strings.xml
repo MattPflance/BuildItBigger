@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Build it Bigger</string>
+    <string name="instructions">Press a button for a delicious joke!</string>
+    <string name="one_liner_button_text">One Liner</string>
+    <string name="knock_knock_button_text">Knock Knock</string>
+    <string name="dad_joke_button_text">Dad Joke</string>
+</resources>
