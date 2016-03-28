@@ -67,7 +67,7 @@ public class TextDisplayActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        if (mKnockButton.getText().toString() == getString(R.string.who_there)) {
+        if (mKnockButton.getText().toString().equals(getString(R.string.who_there))) {
             String theJoke = mTheJoke.get(0);
             mJokeTextView.setText(theJoke);
             String xWhoText = String.format(getString(R.string.x_who), theJoke.substring(0, theJoke.length()-1));

@@ -38,6 +38,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/view_padding"
             android:visibility="gone"
+            android:textAllCaps="false"
             android:text="@string/who_there" />
 
     </LinearLayout>
