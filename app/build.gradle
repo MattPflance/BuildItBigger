@@ -11,6 +11,16 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
+    productFlavors {
+        free {
+
+        }
+        paid {
+
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -21,11 +31,12 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    // Added for AdMob
     // Libraries
     compile project(':TextDisplayActivity')
     compile 'com.android.support:appcompat-v7:23.2.1'
     compile 'com.android.support:cardview-v7:23.2.1'
     compile 'com.google.android.gms:play-services-ads:8.4.0'
     compile project(path: ':backend', configuration: 'android-endpoints')
+
+    testCompile 'junit:junit:4.12'
 }

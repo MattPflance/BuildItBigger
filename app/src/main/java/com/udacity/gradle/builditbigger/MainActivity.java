@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 import com.mattpflance.textdisplayactivity.TextDisplayActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements EndpointsAsyncTask.GetJokeTaskListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +19,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tellOneLiner(View view){
-        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, TextDisplayActivity.ONE_LINER));
+        new EndpointsAsyncTask(this).execute(new Pair<Context, String>(this, TextDisplayActivity.ONE_LINER));
+    }
+
+    /**
+     * Callback for fetching EndpointsAsyncTask
+     */
+    public void onComplete(ArrayList<String> result, String jokeType) {
+        Intent intent = new Intent(this, TextDisplayActivity.class);
+        intent.putExtra("JOKE TYPE", jokeType);
+        intent.putStringArrayListExtra(jokeType, result);
+        startActivity(intent);
     }
 /* These are not needed in the /main directory since they are PAID features only
     public void tellKnockKnock(View view){

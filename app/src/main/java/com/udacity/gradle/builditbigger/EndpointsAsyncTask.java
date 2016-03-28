@@ -14,14 +14,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, List<String>> {
+public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, ArrayList<String>> {
 
     private static TheJokester myApiService = null;
+
+    private GetJokeTaskListener mGetJokeTaskListener;
+
     private String mJokeType;
     private Context context;
 
+    public EndpointsAsyncTask(GetJokeTaskListener getJokeTaskListener) {
+        mGetJokeTaskListener = getJokeTaskListener;
+    }
+
     @Override
-    protected List<String> doInBackground(Pair<Context, String>... params) {
+    protected ArrayList<String> doInBackground(Pair<Context, String>... params) {
         if(myApiService == null) {  // Only do this once
             TheJokester.Builder builder = new TheJokester.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
                     .setRootUrl("https://synthetic-pipe-126322.appspot.com/_ah/api/");
@@ -33,7 +40,7 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, L
         mJokeType = params[0].second;
 
         try {
-            return myApiService.getJoke(mJokeType).execute().getJoke();
+            return (ArrayList<String>)myApiService.getJoke(mJokeType).execute().getJoke();
         } catch (IOException e) {
             ArrayList<String> err = new ArrayList<>();
             err.add(e.getMessage());
@@ -42,10 +49,12 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, L
     }
 
     @Override
-    protected void onPostExecute(List<String> result) {
-        Intent intent = new Intent(context, TextDisplayActivity.class);
-        intent.putExtra("JOKE TYPE", mJokeType);
-        intent.putStringArrayListExtra(mJokeType, (ArrayList<String>)result);
-        context.startActivity(intent);
+    protected void onPostExecute(ArrayList<String> result) {
+        if (mGetJokeTaskListener != null)
+            mGetJokeTaskListener.onComplete(result, mJokeType);
+    }
+
+    public interface GetJokeTaskListener {
+        void onComplete(ArrayList<String> result, String jokeType);
     }
 }
