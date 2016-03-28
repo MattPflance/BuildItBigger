@@ -107,6 +107,5 @@
     <orderEntry type="library" exported="" name="play-services-basement-8.4.0" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-23.2.1" level="project" />
     <orderEntry type="module" module-name="TextDisplayActivity" exported="" />
-    <orderEntry type="module" module-name="TheJokester" exported="" />
   </component>
 </module>
