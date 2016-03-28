@@ -44,6 +44,7 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, L
     @Override
     protected void onPostExecute(List<String> result) {
         Intent intent = new Intent(context, TextDisplayActivity.class);
+        intent.putExtra("JOKE TYPE", mJokeType);
         intent.putStringArrayListExtra(mJokeType, (ArrayList<String>)result);
         context.startActivity(intent);
     }

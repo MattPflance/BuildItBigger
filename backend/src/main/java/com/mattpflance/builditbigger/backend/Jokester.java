@@ -57,10 +57,10 @@ public class Jokester {
         mTheJoke.clear();
 
         switch (type) {
-            case "ONE_LINER":
+            case "ONE LINER":
                 getOneLiner();
                 break;
-            case "KNOCK_KNOCK":
+            case "KNOCK KNOCK":
                 getKnockKnock();
                 break;
             default:
