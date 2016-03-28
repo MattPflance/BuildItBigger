@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -14,14 +15,19 @@ import com.mattpflance.textdisplayactivity.TextDisplayActivity;
 
 public class MainActivity extends AppCompatActivity implements EndpointsAsyncTask.GetJokeTaskListener {
 
+    private ProgressBar mLoadingBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mLoadingBar = (ProgressBar)findViewById(R.id.loadingBar);
     }
 
     public void tellOneLiner(View view){
         if (Utility.isNetworkAvailable(this)) {
+            mLoadingBar.setVisibility(View.VISIBLE);
             new EndpointsAsyncTask(this).execute(new Pair<Context, String>(this, TextDisplayActivity.ONE_LINER));
         } else {
             Toast.makeText(this, getString(R.string.no_internet), Toast.LENGTH_LONG).show();
@@ -30,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements EndpointsAsyncTas
 
     public void tellKnockKnock(View view){
         if (Utility.isNetworkAvailable(this)) {
+            mLoadingBar.setVisibility(View.VISIBLE);
             new EndpointsAsyncTask(this).execute(new Pair<Context, String>(this, TextDisplayActivity.KNOCK_KNOCK));
         } else {
             Toast.makeText(this, getString(R.string.no_internet), Toast.LENGTH_LONG).show();
@@ -38,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements EndpointsAsyncTas
 
     public void tellDadJoke(View view){
         if (Utility.isNetworkAvailable(this)) {
+            mLoadingBar.setVisibility(View.VISIBLE);
             new EndpointsAsyncTask(this).execute(new Pair<Context, String>(this, TextDisplayActivity.DAD_JOKE));
         } else {
             Toast.makeText(this, getString(R.string.no_internet), Toast.LENGTH_LONG).show();
@@ -48,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements EndpointsAsyncTas
      * Callback for fetching EndpointsAsyncTask
      */
     public void onComplete(ArrayList<String> result, String jokeType) {
+        mLoadingBar.setVisibility(View.GONE);
         Intent intent = new Intent(this, TextDisplayActivity.class);
         intent.putExtra("JOKE TYPE", jokeType);
         intent.putStringArrayListExtra(jokeType, result);
