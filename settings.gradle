@@ -1,1 +1,1 @@
-include ':app', ':TextDisplayActivity', ':backend'
+include ':app', ':TextDisplayActivity', ':backend', ':thejokester'
