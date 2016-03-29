@@ -1,4 +1,4 @@
-package com.mattpflance.builditbigger.backend;
+package com.mattpflance.thejokester;
 
 import java.util.ArrayList;
 

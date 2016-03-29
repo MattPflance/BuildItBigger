@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements EndpointsAsyncTas
 
     private ProgressBar mLoadingBar;
     private InterstitialAd mInterstitial;
+    private Intent mIntent;
     private String mJokeType;
 
     @Override
@@ -30,15 +32,20 @@ public class MainActivity extends AppCompatActivity implements EndpointsAsyncTas
         mLoadingBar = (ProgressBar)findViewById(R.id.loadingBar);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Pre-load the interstitial and show if it's ready
+        if (Utility.isFreeVersion()) {
+            loadInterstitial();
+        }
+    }
+
     public void tellOneLiner(View view){
         if (Utility.isNetworkAvailable(this)) {
             mLoadingBar.setVisibility(View.VISIBLE);
             mJokeType = TextDisplayActivity.ONE_LINER;
-            if (Utility.isFreeVersion()) {
-                loadInterstitial();
-            } else {
-                fetchSelectedJoke();
-            }
+            fetchSelectedJoke();
         } else {
             Toast.makeText(this, getString(R.string.no_internet), Toast.LENGTH_LONG).show();
         }
@@ -71,23 +78,21 @@ public class MainActivity extends AppCompatActivity implements EndpointsAsyncTas
         mInterstitial.setAdUnitId(getString(R.string.interstitial_ad_unit_id));
         mInterstitial.setAdListener(new AdListener() {
             @Override
-            public void onAdLoaded() {
-                super.onAdLoaded();
-                mInterstitial.show();
+            public void onAdClosed() {
+                if (mIntent != null) startActivity(mIntent);
             }
 
             @Override
-            public void onAdClosed() {
-                super.onAdClosed();
-                fetchSelectedJoke();
+            public void onAdFailedToLoad(int errorCode) {
+                mInterstitial = null;
             }
         });
-
-        AdRequest ar = new AdRequest.Builder().build();
-        mInterstitial.loadAd(ar);
+        mInterstitial.loadAd(new AdRequest.Builder().build());
     }
 
     private void fetchSelectedJoke() {
+        mIntent = null;
+        if (mInterstitial != null && mInterstitial.isLoaded()) mInterstitial.show();
         new EndpointsAsyncTask(this).execute(new Pair<Context, String>(this, mJokeType));
     }
 
@@ -96,9 +101,9 @@ public class MainActivity extends AppCompatActivity implements EndpointsAsyncTas
      */
     public void onComplete(ArrayList<String> result, String jokeType) {
         mLoadingBar.setVisibility(View.GONE);
-        Intent intent = new Intent(this, TextDisplayActivity.class);
-        intent.putExtra("JOKE TYPE", jokeType);
-        intent.putStringArrayListExtra(jokeType, result);
-        startActivity(intent);
+        mIntent = new Intent(this, TextDisplayActivity.class);
+        mIntent.putExtra("JOKE TYPE", jokeType);
+        mIntent.putStringArrayListExtra(jokeType, result);
+        if (mInterstitial == null) startActivity(mIntent);
     }
 }
